@@ -1,9 +1,6 @@
 package ro.fortech.employee.repository;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -13,17 +10,28 @@ public class EmployeeEntity {
     @Id
     private int id;
 
+    @Column(name = "cnp", unique = true, nullable = false,updatable = false)
+    private String cnp;
     private String firstName;
     private String lastName;
     private int age;
 
-    public EmployeeEntity(String firstName,String lastName,int age) {
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.age=age;
+    public EmployeeEntity(String cnp, String firstName, String lastName, int age) {
+        this.cnp = cnp;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
     }
 
     public EmployeeEntity() {
+    }
+
+    public String getCnp() {
+        return cnp;
+    }
+
+    public void setCnp(String cnp) {
+        this.cnp = cnp;
     }
 
     public String getFirstName() {
@@ -57,19 +65,21 @@ public class EmployeeEntity {
         EmployeeEntity that = (EmployeeEntity) o;
         return id == that.id &&
                 age == that.age &&
+                cnp.equals(that.cnp) &&
                 firstName.equals(that.firstName) &&
                 lastName.equals(that.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, age);
+        return Objects.hash(id, cnp, firstName, lastName, age);
     }
 
     @Override
     public String toString() {
         return "EmployeeEntity{" +
                 "id=" + id +
+                ", cnp='" + cnp + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +

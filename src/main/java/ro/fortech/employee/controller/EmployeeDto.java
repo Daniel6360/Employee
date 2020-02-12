@@ -5,11 +5,10 @@ import ro.fortech.employee.repository.EmployeeEntity;
 import java.util.Objects;
 
 public class EmployeeDto {
-    static String firstName;
-    static String lastName;
+    private   String firstName;
+    private   String lastName;
 
-    public EmployeeDto() {
-    }
+
 
     public static EmployeeDto toDto(EmployeeEntity employeeEntity) {
         EmployeeDto employeeDto = new EmployeeDto();
